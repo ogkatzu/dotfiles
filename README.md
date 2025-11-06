@@ -14,6 +14,12 @@ My personal dotfiles for macOS and WSL (Ubuntu). Optimized for DevOps workflows 
 - **`.oh-my-zsh/custom/plugins/`** - Custom plugins
   - `zsh-bat` - Replaces cat with bat for syntax highlighting
 
+### VS Code Configuration
+- **`vscode/settings.json`** - VS Code user settings (sanitized)
+- **`vscode/extensions.txt`** - List of installed extensions
+- **`vscode/README.md`** - Installation and configuration guide
+- **`vscode/EXCLUDED_SETTINGS.md`** - Private settings reference
+
 ### WSL Setup
 - **`wsl/setup-wsl-zsh.sh`** - Automated setup script for WSL Ubuntu
 - **`wsl/WSL-SETUP-README.md`** - Detailed installation instructions
@@ -82,10 +88,28 @@ vi       # nvim
    brew install starship bat neovim zsh-syntax-highlighting zsh-autosuggestions
    ```
 
-5. Reload your shell:
+5. Install VS Code extensions (optional):
+   ```bash
+   cat ~/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
+   ```
+
+6. Reload your shell:
    ```bash
    source ~/.zshrc
    ```
+
+### VS Code
+
+See the detailed instructions in `vscode/README.md`.
+
+Quick start:
+```bash
+# Link settings
+ln -sf ~/dotfiles/vscode/settings.json ~/Library/Application\ Support/Code/User/settings.json
+
+# Install extensions
+cat ~/dotfiles/vscode/extensions.txt | xargs -L 1 code --install-extension
+```
 
 ### WSL (Ubuntu)
 
@@ -144,8 +168,14 @@ dotfiles/
 │       │   └── custom-robbyrussell.zsh-theme
 │       └── plugins/
 │           └── zsh-bat/           # Custom bat plugin
+├── vscode/
+│   ├── settings.json              # VS Code settings (sanitized)
+│   ├── extensions.txt             # VS Code extensions list
+│   ├── README.md                  # VS Code setup guide
+│   └── EXCLUDED_SETTINGS.md       # Private settings reference
 ├── wsl/
 │   ├── setup-wsl-zsh.sh          # WSL setup script
+│   ├── fix-line-endings.sh       # Line endings fix helper
 │   └── WSL-SETUP-README.md       # WSL installation guide
 └── README.md                      # This file
 ```

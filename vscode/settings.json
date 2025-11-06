@@ -1,0 +1,79 @@
+{
+    "workbench.colorTheme": "Catppuccin Mocha",
+    "workbench.iconTheme": "material-icon-theme",
+    "workbench.startupEditor": "none",
+    "workbench.sideBar.location": "right",
+    "editor.inlineSuggest.suppressSuggestions": true,
+    "files.autoSave": "afterDelay",
+    "glassit.alpha": 240,
+    "remote.SSH.remotePlatform": {
+        "127.0.0.1": "linux"
+    },
+    "security.workspace.trust.untrustedFiles": "open",
+    "git.confirmSync": false,
+    "redhat.telemetry.enabled": false,
+    "github.copilot.enable": {
+        "*": true,
+        "plaintext": false,
+        "markdown": false,
+        "scminput": false,
+        "yaml": true,
+        "helm": true,
+        "groovy": false,
+        "terraform": false
+    },
+    "security.allowedUNCHosts": [
+        "wsl.localhost"
+    ],
+    "terminal.integrated.defaultProfile.windows": "Ubuntu (WSL)",
+    "terminal.integrated.profiles.windows": {
+        "PowerShell": {
+            "source": "PowerShell",
+            "icon": "terminal-powershell"
+        },
+        "Command Prompt": {
+            "path": [
+                "${env:windir}\\Sysnative\\cmd.exe",
+                "${env:windir}\\System32\\cmd.exe"
+            ],
+            "args": [],
+            "icon": "terminal-cmd"
+        },
+        "Git Bash": {
+            "source": "Git Bash"
+        },
+        "Windows PowerShell": {
+            "path": "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+        },
+        "Ubuntu (WSL)": {
+            "path": "C:\\WINDOWS\\System32\\wsl.exe",
+            "args": [
+                "-d",
+                "Ubuntu"
+            ]
+        }
+    },
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[terraform]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+    },
+    "[terraform-vars]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+    },
+    "files.saveConflictResolution": "overwriteFileOnDisk"
+}
