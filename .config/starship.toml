@@ -1,0 +1,273 @@
+##########################################################################
+# STARSHIP PROMPT CONFIGURATION - DevOps Focus
+##########################################################################
+# Optimized for: Kubernetes, Cloud Providers, Terraform, Docker, Git
+# Docs: https://starship.rs/config/
+
+# Timeout for starship to execute commands (in milliseconds)
+command_timeout = 1000
+
+# Format of the prompt
+format = """
+[┌─](bold blue) $username$hostname$kubernetes$terraform$aws$gcloud$azure$docker_context$git_branch$git_status
+[└─](bold blue) $directory$character"""
+
+# Alternative format (single line):
+# format = "$username$hostname$kubernetes$terraform$aws$gcloud$azure$docker_context$directory$git_branch$git_status$character"
+
+##########################################################################
+# PROMPT CHARACTER
+##########################################################################
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold green)"
+
+##########################################################################
+# DIRECTORY
+##########################################################################
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+style = "bold cyan"
+format = "[$path]($style)[$read_only]($read_only_style) "
+read_only = " 🔒"
+
+##########################################################################
+# KUBERNETES
+##########################################################################
+[kubernetes]
+disabled = false
+format = '[$symbol$context( \($namespace\))]($style) '
+symbol = "☸️ "
+style = "bold blue"
+# Only show when in kubeconfig contexts
+detect_files = ['k8s', 'Dockerfile', 'deployment.yaml', 'kustomization.yaml']
+detect_folders = ['k8s', '.kube']
+
+[kubernetes.context_aliases]
+"arn:aws:eks:.*:.*:cluster/(?P<cluster>[\\w-]+)" = "eks-$cluster"
+"gke_.*_(?P<cluster>[\\w-]+)" = "gke-$cluster"
+
+##########################################################################
+# CLOUD PROVIDERS
+##########################################################################
+
+# AWS
+[aws]
+disabled = false
+format = '[$symbol($profile )(\($region\) )]($style)'
+symbol = "☁️ "
+style = "bold yellow"
+
+[aws.region_aliases]
+us-east-1 = "use1"
+us-east-2 = "use2"
+us-west-1 = "usw1"
+us-west-2 = "usw2"
+eu-west-1 = "euw1"
+eu-central-1 = "euc1"
+ap-southeast-1 = "apse1"
+
+# Google Cloud
+[gcloud]
+disabled = true
+format = '[$symbol$account(@$domain)(\($region\))]($style) '
+symbol = "️📊 "
+style = "bold blue"
+
+# Azure
+[azure]
+disabled = false
+format = '[$symbol($subscription)]($style) '
+symbol = "️🔹 "
+style = "bold blue"
+
+##########################################################################
+# INFRASTRUCTURE AS CODE
+##########################################################################
+
+# Terraform
+[terraform]
+disabled = false
+format = '[$symbol$workspace]($style) '
+symbol = "💠 "
+style = "bold purple"
+
+# Pulumi
+[pulumi]
+disabled = false
+format = '[$symbol$stack]($style) '
+symbol = "🧊 "
+style = "bold yellow"
+
+# Helm
+[helm]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = "⎈ "
+style = "bold purple"
+
+##########################################################################
+# CONTAINERS & ORCHESTRATION
+##########################################################################
+
+# Docker
+[docker_context]
+disabled = false
+format = '[$symbol$context]($style) '
+symbol = "🐳 "
+style = "bold blue"
+only_with_files = true
+detect_files = ['docker-compose.yml', 'docker-compose.yaml', 'Dockerfile']
+
+##########################################################################
+# VERSION CONTROL
+##########################################################################
+
+# Git Branch
+[git_branch]
+disabled = false
+format = "[$symbol$branch(:$remote_branch)]($style) "
+symbol = " "
+style = "bold purple"
+
+# Git Status
+[git_status]
+disabled = false
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+up_to_date = "✓"
+untracked = "?${count}"
+stashed = "$${count}"
+modified = "!${count}"
+staged = "+${count}"
+renamed = "»${count}"
+deleted = "✘${count}"
+
+# Git Commit
+[git_commit]
+disabled = false
+commit_hash_length = 7
+tag_symbol = "🏷 "
+style = "bold green"
+
+# Git State (rebase, merge, etc.)
+[git_state]
+disabled = false
+format = '[\($state( $progress_current of $progress_total)\)]($style) '
+style = "bold yellow"
+
+##########################################################################
+# PROGRAMMING LANGUAGES (commonly used in DevOps)
+##########################################################################
+
+# Python
+[python]
+disabled = false
+format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+symbol = "🐍 "
+style = "bold yellow"
+
+# Node.js
+[nodejs]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = "⬢ "
+style = "bold green"
+
+# Go
+[golang]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = "🐹 "
+style = "bold cyan"
+
+# Rust
+[rust]
+disabled = false
+format = '[$symbol($version )]($style)'
+symbol = "🦀 "
+style = "bold red"
+
+##########################################################################
+# SYSTEM INFO
+##########################################################################
+
+# Username
+[username]
+disabled = false
+show_always = false
+format = "[$user]($style)@"
+style_user = "bold green"
+style_root = "bold red"
+
+# Hostname
+[hostname]
+disabled = false
+ssh_only = true
+format = "[$hostname]($style) "
+style = "bold green"
+
+# Command Duration
+[cmd_duration]
+disabled = false
+min_time = 2000
+format = "took [$duration]($style) "
+style = "bold yellow"
+
+# Time
+[time]
+disabled = true
+format = '🕙[\[ $time \]]($style) '
+style = "bold white"
+time_format = "%T"
+
+# Battery
+[battery]
+disabled = false
+full_symbol = "🔋"
+charging_symbol = "⚡"
+discharging_symbol = "💀"
+
+[[battery.display]]
+threshold = 10
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+##########################################################################
+# PACKAGE MANAGERS
+##########################################################################
+
+[package]
+disabled = true
+symbol = "📦 "
+format = "[$symbol$version]($style) "
+style = "bold yellow"
+
+##########################################################################
+# OS & SHELL
+##########################################################################
+
+[os]
+disabled = true
+format = "[$symbol]($style)"
+
+[os.symbols]
+Macos = "🍎"
+Linux = "🐧"
+Windows = "🪟"
+
+[shell]
+disabled = true
+format = "[$indicator]($style) "
+bash_indicator = "bsh"
+zsh_indicator = "zsh"
+fish_indicator = "fsh"
