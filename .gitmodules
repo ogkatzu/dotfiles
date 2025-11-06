@@ -1,0 +1,3 @@
+[submodule ".oh-my-zsh/custom/plugins/zsh-bat"]
+	path = .oh-my-zsh/custom/plugins/zsh-bat
+	url = https://github.com/fdellwing/zsh-bat.git
