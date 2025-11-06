@@ -38,20 +38,46 @@ You have several options to transfer the `setup-wsl-zsh.sh` script to your WSL e
    chmod +x ~/setup-wsl-zsh.sh
    ```
 
-#### Option C: Download from a cloud service
-1. Upload `setup-wsl-zsh.sh` to a cloud service (Google Drive, Dropbox, etc.)
-2. Download it in WSL:
+#### Option C: Clone from Git Repository
+1. Push your dotfiles to GitHub/GitLab
+2. Clone in WSL:
    ```bash
-   wget <your-cloud-link> -O ~/setup-wsl-zsh.sh
-   chmod +x ~/setup-wsl-zsh.sh
+   git clone <your-repo-url> ~/dotfiles
+   cd ~/dotfiles/wsl
    ```
 
-### 2. Run the Setup Script
+### 2. Fix Line Endings (IMPORTANT!)
 
-Once the script is in your WSL home directory:
+When transferring files from Windows to WSL, you may encounter line ending issues (CRLF vs LF). Fix this before running the script:
+
+```bash
+# Install dos2unix if not already installed
+sudo apt-get update && sudo apt-get install -y dos2unix
+
+# Fix line endings
+dos2unix ~/setup-wsl-zsh.sh
+
+# OR use sed if dos2unix is not available
+sed -i 's/\r$//' ~/setup-wsl-zsh.sh
+
+# Make it executable
+chmod +x ~/setup-wsl-zsh.sh
+```
+
+If you cloned from git, the line endings should already be correct.
+
+### 3. Run the Setup Script
+
+Once the script is in your WSL home directory and line endings are fixed:
 
 ```bash
 cd ~
+./setup-wsl-zsh.sh
+```
+
+Or if you cloned from git:
+```bash
+cd ~/dotfiles/wsl
 ./setup-wsl-zsh.sh
 ```
 
